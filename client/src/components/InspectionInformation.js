@@ -1,15 +1,34 @@
 import React from 'react';
-import './InspectionInformation.css';
 import { useTranslation } from 'react-i18next';
+import Table from './ui/Table';
+import styled from 'styled-components';
+
+const InspectionInformationWrapper = styled.div`
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  table {
+    th:nth-child(1),
+    td:nth-child(1) {
+      width: 260px;
+      max-width: 260px;
+    }
+    th:nth-child(2),
+    td:nth-child(2) {
+      width: calc(100% - 240px);
+    }
+  }
+`;
 
 const InspectionInformation = ({ inspectionData }) => {
   const data = inspectionData || {};
   const { t } = useTranslation();
-  
+
   return (
-    <div className="inspection-information">
-      <h2 className="inspection-information-title">{t('inspectionInformationTitle')}</h2>
-      <table className="inspection-information-table">
+    <InspectionInformationWrapper>
+      <h2>{t('inspectionInformationTitle')}</h2>
+      <Table>
         <thead>
           <tr>
             <th>{t('subjectOfInspection')}</th>
@@ -58,8 +77,8 @@ const InspectionInformation = ({ inspectionData }) => {
             <td>{data.inspectionContactPerson || ''}</td>
           </tr>
         </tbody>
-      </table>
-    </div>
+      </Table>
+    </InspectionInformationWrapper>
   );
 };
 

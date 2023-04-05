@@ -1,6 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import './Scheduling.css';
 import { useTranslation } from 'react-i18next';
+import './Scheduling.css';
+import styled from 'styled-components';
+import Table from './ui/Table';
+import Button from './ui/Button';
+import Form from './ui/Form';
+import TextInput from './ui/TextInput';
+
+const SchedulingWrapper = styled.div`
+  table {
+    th,
+    td {
+      width: 33.33%;
+      max-width: 33.33%;
+    }
+  }
+`;
 
 const Scheduling = ({ events, setEvents }) => {
   const [rows, setRows] = useState(events || []);
@@ -80,78 +95,78 @@ const Scheduling = ({ events, setEvents }) => {
   };  
 
   return (
-    <div className="scheduling-container">
-      <h2>{t('scheduling.title')}</h2>
-      <table className="table">
-        <thead>
-          <tr>
-            {headers.map((header, index) => (
-              <th key={index}>{header}</th>
-            ))}
-          </tr>
-        </thead>
-        {rows.length ? (
-          <tbody>
-            {rows.map((row) => (
-              <tr key={row.id}>
-                {headers.map((header, index) => (
-                  <td key={index}>
-                    {header === `vko ${row.week}` ? row.event : ''}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        ) : null}
-      </table>
-      <button className="scheduling-button" onClick={() => setShowForm(true)}>
-        {t('scheduling.addColumn')}
-      </button>
-      {showForm && (
-        <div className="modal" onClick={() => setShowForm(false)}>
-          <div
-            className="modal-content"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <form className="scheduling-form" onSubmit={handleFormSubmit}>
-              <label>
-                {t('scheduling.event')}:
-                <input
-                  type="text"
-                  name="event"
-                  value={newEvent.event}
-                  onChange={handleFormChange}
-                />
-              </label>
-              <label>
-                {t('scheduling.person')}:
-                <input
-                  type="text"
-                  name="person"
-                  value={newEvent.person}
-                  onChange={handleFormChange}
-                />
-              </label>
-              <label>
-                {t('scheduling.week')}:
-                <input
-                  type="text"
-                  name="week"
-                  value={newEvent.week}
-                  onChange={handleFormChange}
-                />
-              </label>
-              <button type="submit" onClick={() => setEvents(rows)}>
-                {t('scheduling.save')}
-              </button>
-              <button type="button" onClick={() => setShowForm(false)}>
-                {t('scheduling.cancel')}
-              </button>
-            </form>
-          </div>
+    <SchedulingWrapper>
+    <h2>{t('scheduling.title')}</h2>
+    <Table>
+      <thead>
+        <tr>
+          {headers.map((header, index) => (
+            <th key={index}>{header}</th>
+          ))}
+        </tr>
+      </thead>
+      {rows.length ? (
+        <tbody>
+          {rows.map((row) => (
+            <tr key={row.id}>
+              {headers.map((header, index) => (
+                <td key={index}>
+                  {header === `vko ${row.week}` ? row.event : ''}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      ) : null}
+    </Table>
+    <Button className='scheduling-button' onClick={() => setShowForm(true)}>
+      {t('scheduling.addColumn')}
+    </Button>
+    {showForm && (
+      <div className="modal" onClick={() => setShowForm(false)}>
+        <div
+          className="modal-content"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <Form onSubmit={handleFormSubmit}>
+            <label>
+              {t('scheduling.event')}:
+              <TextInput
+                type="text"
+                name="event"
+                value={newEvent.event}
+                onChange={handleFormChange}
+              />
+            </label>
+            <label>
+              {t('scheduling.person')}:
+              <TextInput
+                type="text"
+                name="person"
+                value={newEvent.person}
+                onChange={handleFormChange}
+              />
+            </label>
+            <label>
+              {t('scheduling.week')}:
+              <TextInput
+                type="text"
+                name="week"
+                value={newEvent.week}
+                onChange={handleFormChange}
+              />
+            </label>
+            <Button className='scheduling-button' type="submit" onClick={() => setEvents(rows)}>
+              {t('scheduling.save')}
+            </Button>
+            <Button className='scheduling-button' type="button" onClick={() => setShowForm(false)}>
+              {t('scheduling.cancel')}
+            </Button>
+          </Form>
         </div>
-      )}
-    </div>
+      </div>
+    )}
+  </SchedulingWrapper>
   );
 };
 

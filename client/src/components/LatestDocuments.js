@@ -1,6 +1,21 @@
 import React from 'react';
-import './LatestDocuments.css';
 import { useTranslation } from 'react-i18next';
+import Table from './ui/Table';
+import styled from 'styled-components';
+
+const LatestDocumentsWrapper = styled.div`
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  table {
+    th:nth-child(1),
+    td:nth-child(1) {
+      width: 260px;
+      max-width: 260px;
+    }
+  }
+`;
 
 const LatestDocuments = ({ latestDocuments }) => {
   const { t } = useTranslation();
@@ -18,9 +33,9 @@ const LatestDocuments = ({ latestDocuments }) => {
   };
 
   return (
-    <div className="latest-documents">
+    <LatestDocumentsWrapper>
       <h2>{t('latestDocuments')}</h2>
-      <table>
+      <Table>
         <thead>
           <tr>
             <th>{t('document')}</th>
@@ -37,8 +52,8 @@ const LatestDocuments = ({ latestDocuments }) => {
             </tr>
           ))}
         </tbody>
-      </table>
-    </div>
+      </Table>
+    </LatestDocumentsWrapper>
   );
 };
 

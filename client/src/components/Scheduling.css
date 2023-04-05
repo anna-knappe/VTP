@@ -13,18 +13,12 @@
 }
 
 .scheduling-button {
-  background-color: #f8f8f8;
-  color: black;
   font-size: 16px;
   padding: 10px;
   border: none;
   border-radius: 5px;
   margin-top: 20px;
   cursor: pointer;
-}
-
-.scheduling-button:hover {
-  background-color: #d3d3d3;
 }
 
 .scheduling-button:before {

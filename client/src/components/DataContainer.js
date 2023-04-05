@@ -4,6 +4,8 @@ import InspectionInformation from './InspectionInformation';
 import LatestDocuments from './LatestDocuments';
 import Scheduling from './Scheduling';
 import TargetTimeframe from './TargetTimeframe';
+import Card from './ui/Card';
+import PageContainer from './ui/PageContainer';
 
 const DataContainer = () => {
   const { inspectionId } = useParams();
@@ -41,12 +43,20 @@ const DataContainer = () => {
   
 
   return (
-    <>
-      <TargetTimeframe targetTimeframeData={targetTimeframeData} />
-      <InspectionInformation inspectionData={inspectionData} />
-      <LatestDocuments latestDocuments={latestDocuments} />
-      <Scheduling events={schedulingData} setEvents={handleSchedulingDataUpdate} />
-    </>
+    <PageContainer>
+      <Card>
+        <TargetTimeframe targetTimeframeData={targetTimeframeData} />
+      </Card>
+      <Card>
+        <InspectionInformation inspectionData={inspectionData} />
+      </Card>
+      <Card>
+        <LatestDocuments latestDocuments={latestDocuments} />
+      </Card>
+      <Card>
+        <Scheduling events={schedulingData} setEvents={handleSchedulingDataUpdate} />
+      </Card>
+    </PageContainer>
   );
 };
 

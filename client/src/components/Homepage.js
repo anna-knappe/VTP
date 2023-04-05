@@ -87,28 +87,26 @@ const Homepage = () => {
           ))}
         </List>
       </Card>
+      {selectedInspection && (
+        <Card>
+          <Heading>Inspection Plans for {selectedInspection.name}:</Heading>
+          <List>
+            {inspectionPlans && inspectionPlans.length > 0 ? (
+              inspectionPlans.map((plan) => (
+                <InspectionItem key={plan.id}>
+                  <PlanLink to={`/tarkastukset/${plan.id}`}>
+                    <FontAwesomeIcon icon={faGavel} className="icon-color" style={{ marginRight: '0.5em' }} />
+                    DataContainer for {plan.subjectOfInspection}
+                  </PlanLink>
+                </InspectionItem>
+              ))
+            ) : (
+              <p>No inspection plans found.</p>
+            )}
+          </List>
+        </Card>
+      )}
 
-      
-        {selectedInspection && (
-          <Card>
-            <Heading>Inspection Plans for {selectedInspection.name}:</Heading>
-            <List>
-              {inspectionPlans && inspectionPlans.length > 0 ? (
-                inspectionPlans.map((plan) => (
-                  <InspectionItem key={plan.id}>
-                    <PlanLink to={`/tarkastukset/${plan.id}`}>
-                      <FontAwesomeIcon icon={faGavel} className="icon-color" style={{ marginRight: '0.5em' }} />
-                      DataContainer for {plan.subjectOfInspection}
-                    </PlanLink>
-                  </InspectionItem>
-                ))
-              ) : (
-                <p>No inspection plans found.</p>
-              )}
-            </List>
-            </Card>
-        )}
-      
     </PageContainer>
   );
 };
