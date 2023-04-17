@@ -8,28 +8,11 @@ import Table from './ui/Table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFile } from '@fortawesome/free-solid-svg-icons';
 
-const CustomTable = styled(Table)`
-    th:nth-child(1),
-    td:nth-child(1) {
-      width: 260px;
-    }
-
-    th:nth-child(2),
-    td:nth-child(2),
-    th:nth-child(3),
-    td:nth-child(3) {
-      width: 180px;
-    }
-
-    th:nth-child(5),
-    td:nth-child(5) {
-      width: 40px;
-    }
-  `;
-
-
+const CustomTable = styled(Table)``;
 
 const TargetTimeframe = ({ targetTimeframeData }) => {
+  const colWidths = ['180px', '180px', '180px', 'auto', '40px'];
+
   const currentDate = new Date();
   const { t } = useTranslation();
 
@@ -67,7 +50,7 @@ const TargetTimeframe = ({ targetTimeframeData }) => {
   return (
     <>
       <h2>{t('targetTimeframeTitle')}</h2>
-      <CustomTable>
+      <CustomTable colWidths={colWidths}>
         <thead>
           <tr>
             <FirstHeader>{t('target')}</FirstHeader>

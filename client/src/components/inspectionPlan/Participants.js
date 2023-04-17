@@ -1,6 +1,26 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
+import Table from '../ui/Table';
+import Button from '../ui/Button';
+import TextInput from '../ui/TextInput';
+
+const ParticipantsTitle = styled.h2`
+  margin-bottom: 1rem;
+`;
+
+const StyledTable = styled(Table)`
+  width: 100%;
+  margin-bottom: 1rem;
+`;
+
+const FormContainer = styled.div`
+  margin-bottom: 1rem;
+`;
 
 const Participants = ({ participants, setParticipants, approvalChecked  }) => {
+  const colWidths = ['auto', '30%', 'auto', 'auto', 'auto', 'auto'];
+
+  
   const [showForm, setShowForm] = useState(false);
   const [newParticipant, setNewParticipant] = useState({
     name: '',
@@ -47,8 +67,8 @@ const Participants = ({ participants, setParticipants, approvalChecked  }) => {
 
   return (
     <div>
-      <h2>Osallistujat</h2>
-      <table>
+<ParticipantsTitle>Osallistujat</ParticipantsTitle>      
+<StyledTable colWidths={colWidths}>
         <thead>
           <tr>
             <th>Nimi</th>
@@ -69,154 +89,129 @@ const Participants = ({ participants, setParticipants, approvalChecked  }) => {
               <td>{participant.responsibility}</td>
               <td>
               {!editedParticipant || editedParticipant.id !== participant.id ? (
-                  <button onClick={(event) => handleEditClick(event, participant)} disabled={approvalChecked}>
+                  <Button onClick={(event) => handleEditClick(event, participant)} disabled={approvalChecked}>
                     Muokkaa
-                  </button>
+                  </Button>
                 ) : (
                   <form onSubmit={(event) => handleEditSubmit(event, editedParticipant)}>
-                    <div>
-                      <label htmlFor="name">Nimi:</label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={editedParticipant.name}
-                        onChange={(event) =>
-                          setEditedParticipant((prevState) => ({
-                            ...prevState,
-                            name: event.target.value
-                          }))
-                        }
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="email">Sähköposti:</label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={editedParticipant.email}
-                        onChange={(event) =>
-                          setEditedParticipant((prevState) => ({
-                            ...prevState,
-                            email: event.target.value
-                          }))
-                        }
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="phone">Matkapuhelinnumero:</label>
-                      <input
-                        type="text"
-                        id="phone"
-                        name="phone"
-                        value={editedParticipant.phone}
-                        onChange={(event) =>
-                          setEditedParticipant((prevState) => ({
-                            ...prevState,
-                            phone: event.target.value
-                          }))
-                        }
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="htp">Htp:</label>
-                      <input
-                        type="text"
-                        id="htp"
-                        name="htp"
-                        value={editedParticipant.htp}
-                        onChange={(event) =>
-                          setEditedParticipant((prevState) => ({
-                            ...prevState,
-                            htp: event.target.value
-                          }))
-                        }
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="responsibility">Vastuu:</label>
-                      <input
-                        type="text"
-                        id="responsibility"
-                        name="responsibility"
-                        value={editedParticipant.responsibility}
-                        onChange={(event) =>
-                          setEditedParticipant((prevState) => ({
-                            ...prevState,
-                            responsibility: event.target.value
-                          }))
-                        }
-                      />
-                    </div>
-                    <button type="submit">Tallenna</button>
-                    <button onClick={() => setEditedParticipant(null)}>Peruuta</button>
-                  </form>
+              <TextInput
+                label="Nimi:"
+                id="name"
+                name="name"
+                value={editedParticipant.name}
+                onChange={(event) =>
+                  setEditedParticipant((prevState) => ({
+                    ...prevState,
+                    name: event.target.value
+                  }))
+                }
+              />
+              <TextInput
+                label="Sähköposti:"
+                type="email"
+                id="email"
+                name="email"
+                value={editedParticipant.email}
+                onChange={(event) =>
+                  setEditedParticipant((prevState) => ({
+                    ...prevState,
+                    email: event.target.value
+                  }))
+                }
+              />
+              <TextInput
+                label="Matkapuhelinnumero:"
+                id="phone"
+                name="phone"
+                value={editedParticipant.phone}
+                onChange={(event) =>
+                  setEditedParticipant((prevState) => ({
+                    ...prevState,
+                    phone: event.target.value
+                  }))
+                }
+              />
+              <TextInput
+                label="Htp:"
+                id="htp"
+                name="htp"
+                value={editedParticipant.htp}
+                onChange={(event) =>
+                  setEditedParticipant((prevState) => ({
+                    ...prevState,
+                    htp: event.target.value
+                  }))
+                }
+              />
+              <TextInput
+                label="Vastuu:"
+                id="responsibility"
+                name="responsibility"
+                value={editedParticipant.responsibility}
+                onChange={(event) =>
+                  setEditedParticipant((prevState) => ({
+                    ...prevState,
+                    responsibility: event.target.value
+                  }))
+                }
+              />
+              <Button type="submit">Tallenna</Button>
+              <Button onClick={() => setEditedParticipant(null)}>Peruuta</Button>
+            </form>
                 )}
               </td>
             </tr>
           ))}
         </tbody>
-      </table>
-      {!showForm && (
-        <button onClick={() => setShowForm(true)} disabled={approvalChecked}>
+        </StyledTable>
+        {!showForm && (
+        <Button onClick={() => setShowForm(true)} disabled={approvalChecked}>
           Lisää osallistuja
-        </button>
+        </Button>
       )}
       {showForm && (
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="nimi">Nimi:</label>
-            <input
-              type="text"
+        <FormContainer>
+          <form onSubmit={handleSubmit}>
+            {/* ... replace existing input elements with TextInput components ... */}
+            <TextInput
+              label="Nimi:"
               id="name"
               name="name"
               value={newParticipant.name}
               onChange={handleInputChange}
             />
-          </div>
-          <div>
-            <label htmlFor="sähköposti">Sähköposti:</label>
-            <input
+            <TextInput
+              label="Sähköposti:"
               type="email"
               id="email"
               name="email"
               value={newParticipant.email}
               onChange={handleInputChange}
             />
-          </div>
-          <div>
-            <label htmlFor="matkapuhelinnumero">Matkapuhelinnumero:</label>
-            <input
-              type="text"
+            <TextInput
+              label="Matkapuhelinnumero:"
               id="phone"
               name="phone"
               value={newParticipant.phone}
               onChange={handleInputChange}
             />
-          </div>
-          <div>
-            <label htmlFor="htp">Htp:</label>
-            <input
-              type="text"
+            <TextInput
+              label="Htp:"
               id="htp"
               name="htp"
               value={newParticipant.htp}
               onChange={handleInputChange}
             />
-          </div>
-          <div>
-            <label htmlFor="responsibility">Vastuu:</label>
-            <input
-              type="text"
+            <TextInput
+              label="Vastuu:"
               id="responsibility"
               name="responsibility"
               value={newParticipant.responsibility}
               onChange={handleInputChange}
             />
-          </div>
-          <button type="submit">Tallenna</button>
-        </form>
+            <Button type="submit">Tallenna</Button>
+          </form>
+        </FormContainer>
       )}
     </div>
   );

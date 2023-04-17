@@ -96,19 +96,21 @@ li {
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 0.9rem;
+  line-height: 1.4;
   margin-bottom: 1.5rem;
 }
 
-table th, table td {
-  padding: 12px 15px;
+table th,
+table td {
+  padding: 8px 12px;
   text-align: left;
   border: 1px solid var(--accent-grey);
+  vertical-align: middle;
 }
 
 table thead th {
-  background-color: var(--secondary-blue);
+  background-color: var(--primary-blue);
   color: white;
   font-weight: bold;
 }
@@ -122,9 +124,12 @@ table tbody tr:nth-child(even) {
 }
 
 table tbody tr:hover {
-  background-color: var(--accent-grey);
-  transition: background-color 0.2s;
+  background-color: var(--secondary-blue);
+  color: var(--dark-grey-text);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
 }
+
 
 .icon-color {
   color: var(--primary-blue);

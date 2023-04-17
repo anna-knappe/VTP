@@ -1,31 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledTable = styled.table`
+const TableWrapper = styled.table`
   width: 100%;
   border-collapse: collapse;
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 0.9rem;
+  line-height: 1.4;
   margin-bottom: 1.5rem;
-  table-layout: fixed;
 
   th,
   td {
-    padding: 12px 15px;
+    padding: 8px 12px;
     text-align: left;
-    border: none;
-    box-sizing: border-box;
+    border: 1px solid var(--border-grey);
+    vertical-align: middle;
   }
 
   thead th {
     background-color: var(--secondary-blue);
     color: white;
     font-weight: bold;
-    height: 50px;
-  }
-
-  tbody tr {
-    height: 40px;
   }
 
   tbody tr:nth-child(odd) {
@@ -37,17 +31,40 @@ const StyledTable = styled.table`
   }
 
   tbody tr:hover {
-    background-color: #f0f0f0;
-    transition: background-color 0.2s;
+    background-color: var(--accent-grey);
+    color: var(--dark-grey-text);
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
   }
 `;
 
-const Table = ({ children, className, ...props }) => {
-    return (
-      <StyledTable className={className} {...props}>
-        {children}
-      </StyledTable>
-    );
+const Table = ({ children, colWidths }) => {
+  const renderChildren = () => {
+    return React.Children.map(children, (child) => {
+      if (React.isValidElement(child) && child.type === 'thead') {
+        return React.cloneElement(child, {
+          children: React.Children.map(child.props.children, (row) => {
+            if (React.isValidElement(row) && row.type === 'tr') {
+              return React.cloneElement(row, {
+                children: React.Children.map(row.props.children, (cell, index) => {
+                  if (React.isValidElement(cell) && colWidths && colWidths[index]) {
+                    return React.cloneElement(cell, {
+                      style: { width: colWidths[index], maxWidth: colWidths[index] },
+                    });
+                  }
+                  return cell;
+                }),
+              });
+            }
+            return row;
+          }),
+        });
+      }
+      return child;
+    });
   };
+
+  return <TableWrapper>{renderChildren()}</TableWrapper>;
+};
 
 export default Table;

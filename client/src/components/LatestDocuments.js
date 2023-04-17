@@ -7,18 +7,11 @@ const LatestDocumentsWrapper = styled.div`
   h2 {
     margin-bottom: 1rem;
   }
-
-  table {
-    th:nth-child(1),
-    td:nth-child(1) {
-      width: 260px;
-      max-width: 260px;
-    }
-  }
 `;
 
 const LatestDocuments = ({ latestDocuments }) => {
   const { t } = useTranslation();
+  const colWidths = ['260px'];
 
   const formatDate = (date) => {
     const options = {
@@ -35,7 +28,7 @@ const LatestDocuments = ({ latestDocuments }) => {
   return (
     <LatestDocumentsWrapper>
       <h2>{t('latestDocuments')}</h2>
-      <Table>
+      <Table colWidths={colWidths}>
         <thead>
           <tr>
             <th>{t('document')}</th>

@@ -7,6 +7,8 @@ import InfoBox from './components/inspectionPlan/InfoBox';
 import TopicAreas from './components/inspectionPlan/TopicAreas';
 import InterviewTable from './components/inspectionPlan/InterviewTable';
 import CommentTable from './components/inspectionPlan/CommentTable';
+import PageContainer from './components/ui/PageContainer';
+import Card from './components/ui/Card';
 import './InspectionPlan.css';
 
 const InspectionPlan = () => {
@@ -79,39 +81,32 @@ const InspectionPlan = () => {
   const [approvalChecked, setApprovalChecked] = useState(false);
 
   return (
-    <div>
+    <PageContainer>
       <h1>Inspection Plan</h1>
-      <div className="components-container">
-        <div className="component">
-          <BasicInformation {...inspectionData} />
-        </div>
-        <div className="component">
-          <Participants participants={participants} setParticipants={setParticipants} approvalChecked={approvalChecked} />
-        </div>
-      </div>
-      <div className="components-container">
-        <div className="component">
-          <Timetable data={timetableData} />
-        </div>
-        <div className="component">
-          <InspectionSteps stepsData={stepsData} setStepsData={setStepsData} approvalChecked={approvalChecked} />
-        </div>
-      </div>
-      <InfoBox title="Tavoite" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non ex quis lorem hendrerit bibendum quis id lorem. Praesent blandit vel ante eu tempor. Fusce venenatis malesuada sem, eu commodo enim facilisis eget. Donec lobortis tortor sit amet commodo malesuada. Nulla facilisi. Sed viverra sapien nisl, vitae faucibus odio hendrerit quis." className="full-width" />
-      <TopicAreas data={topicData} approvalChecked={approvalChecked} className="full-width" />
-      <InfoBox title="Peruste" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non ex quis lorem hendrerit bibendum quis id lorem. Praesent blandit vel ante eu tempor. Fusce venenatis malesuada sem, eu commodo enim facilisis eget. Donec lobortis tortor sit amet commodo malesuada. Nulla facilisi. Sed viverra sapien nisl, vitae faucibus odio hendrerit quis." className="full-width" />
-      <InfoBox title="Aihe" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non ex quis lorem hendrerit bibendum quis id lorem. Praesent blandit vel ante eu tempor. Fusce venenatis malesuada sem, eu commodo enim facilisis eget. Donec lobortis tortor sit amet commodo malesuada. Nulla facilisi. Sed viverra sapien nisl, vitae faucibus odio hendrerit quis." className="full-width" />
-      <InfoBox title="Ulkopuolelle rajattavat kokonaisuudet" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non ex quis lorem hendrerit bibendum quis id lorem. Praesent blandit vel ante eu tempor. Fusce venenatis malesuada sem, eu commodo enim facilisis eget. Donec lobortis tortor sit amet commodo malesuada. Nulla facilisi. Sed viverra sapien nisl, vitae faucibus odio hendrerit quis." className="full-width" />
-      <InfoBox title="Tarkastusmenetelmät" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non ex quis lorem hendrerit bibendum quis id lorem. Praesent blandit vel ante eu tempor. Fusce venenatis malesuada sem, eu commodo enim facilisis eget. Donec lobortis tortor sit amet commodo malesuada. Nulla facilisi. Sed viverra sapien nisl, vitae faucibus odio hendrerit quis." className="full-width" />
-      <InfoBox title="Otanta" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non ex quis lorem hendrerit bibendum quis id lorem. Praesent blandit vel ante eu tempor. Fusce venenatis malesuada sem, eu commodo enim facilisis eget. Donec lobortis tortor sit amet commodo malesuada. Nulla facilisi. Sed viverra sapien nisl, vitae faucibus odio hendrerit quis." className="full-width" />
-      <div className="component full-width">
-        <InterviewTable data={interviewData} setData={setInterviewData} approvalChecked={approvalChecked} />
-      </div>
-      <div className="component full-width">
-        <CommentTable data={commentsData} setData={setCommentsData} approvalChecked={approvalChecked} setApprovalChecked={setApprovalChecked} />
-      </div>
+      <Card>
+        <BasicInformation {...inspectionData} />
+        <Participants participants={participants} setParticipants={setParticipants} approvalChecked={approvalChecked} />
+        <Timetable data={timetableData} />
+        <InspectionSteps stepsData={stepsData} setStepsData={setStepsData} approvalChecked={approvalChecked} />
+      </Card>
+      <Card>
+        <InfoBox title="Tavoite" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non ex quis lorem hendrerit bibendum quis id lorem. Praesent blandit vel ante eu tempor. Fusce venenatis malesuada sem, eu commodo enim facilisis eget. Donec lobortis tortor sit amet commodo malesuada. Nulla facilisi. Sed viverra sapien nisl, vitae faucibus odio hendrerit quis." className="full-width" />
+        <TopicAreas data={topicData} approvalChecked={approvalChecked} className="full-width" />
+      
+        <InfoBox title="Peruste" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non ex quis lorem hendrerit bibendum quis id lorem. Praesent blandit vel ante eu tempor. Fusce venenatis malesuada sem, eu commodo enim facilisis eget. Donec lobortis tortor sit amet commodo malesuada. Nulla facilisi. Sed viverra sapien nisl, vitae faucibus odio hendrerit quis." className="full-width" />
+        <InfoBox title="Aihe" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non ex quis lorem hendrerit bibendum quis id lorem. Praesent blandit vel ante eu tempor. Fusce venenatis malesuada sem, eu commodo enim facilisis eget. Donec lobortis tortor sit amet commodo malesuada. Nulla facilisi. Sed viverra sapien nisl, vitae faucibus odio hendrerit quis." className="full-width" />
+        <InfoBox title="Ulkopuolelle rajattavat kokonaisuudet" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non ex quis lorem hendrerit bibendum quis id lorem. Praesent blandit vel ante eu tempor. Fusce venenatis malesuada sem, eu commodo enim facilisis eget. Donec lobortis tortor sit amet commodo malesuada. Nulla facilisi. Sed viverra sapien nisl, vitae faucibus odio hendrerit quis." className="full-width" />
+        <InfoBox title="Tarkastusmenetelmät" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non ex quis lorem hendrerit bibendum quis id lorem. Praesent blandit vel ante eu tempor. Fusce venenatis malesuada sem, eu commodo enim facilisis eget. Donec lobortis tortor sit amet commodo malesuada. Nulla facilisi. Sed viverra sapien nisl, vitae faucibus odio hendrerit quis." className="full-width" />
+        <InfoBox title="Otanta" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non ex quis lorem hendrerit bibendum quis id lorem. Praesent blandit vel ante eu tempor. Fusce venenatis malesuada sem, eu commodo enim facilisis eget. Donec lobortis tortor sit amet commodo malesuada. Nulla facilisi. Sed viverra sapien nisl, vitae faucibus odio hendrerit quis." className="full-width" />
+        </Card>
+        <Card>
+          <InterviewTable data={interviewData} setData={setInterviewData} approvalChecked={approvalChecked} />
+        
+          <CommentTable data={commentsData} setData={setCommentsData} approvalChecked={approvalChecked} setApprovalChecked={setApprovalChecked} />
+        
+      </Card>
       {/* Add any other components you need here */}
-    </div>
+    </PageContainer>
   );
 };
 

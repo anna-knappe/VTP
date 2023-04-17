@@ -8,18 +8,12 @@ import Form from './ui/Form';
 import TextInput from './ui/TextInput';
 
 const SchedulingWrapper = styled.div`
-  table {
-    th,
-    td {
-      width: 33.33%;
-      max-width: 33.33%;
-    }
-  }
 `;
 
 const Scheduling = ({ events, setEvents }) => {
   const [rows, setRows] = useState(events || []);
   const { t } = useTranslation();
+  const colWidths = ['33.33%', '33.33%', '33.33%'];
 
   useEffect(() => {
     setRows(events);
@@ -97,7 +91,7 @@ const Scheduling = ({ events, setEvents }) => {
   return (
     <SchedulingWrapper>
     <h2>{t('scheduling.title')}</h2>
-    <Table>
+    <Table colWidths={colWidths}>
       <thead>
         <tr>
           {headers.map((header, index) => (
