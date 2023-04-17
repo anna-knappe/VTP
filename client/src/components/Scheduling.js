@@ -10,7 +10,7 @@ import TextInput from './ui/TextInput';
 const SchedulingWrapper = styled.div`
 `;
 
-const Scheduling = ({ events, setEvents }) => {
+const Scheduling = ({ events, setEvents, draftId }) => {
   const [rows, setRows] = useState(events || []);
   const { t } = useTranslation();
   const colWidths = ['33.33%', '33.33%', '33.33%'];
@@ -54,18 +54,12 @@ const Scheduling = ({ events, setEvents }) => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const newRow = {
-      id: rows.length + 1,
+      draft_id: draftId,
       event: newEvent.event,
       person: newEvent.person,
-      week: newEvent.week
+      week: newEvent.week,
     };
-    setRows((prevState) => (Array.isArray(prevState) ? [...prevState, newRow] : [newRow]));
-    setNewEvent({
-      event: '',
-      person: '',
-      week: ''
-    });
-    setShowForm(false);
+  
   
     // Add this code to make a POST request to your backend
     try {
@@ -82,11 +76,18 @@ const Scheduling = ({ events, setEvents }) => {
       }
   
       // Update the parent component's state with the new scheduling data
-      setEvents(rows);
+      setEvents((prevState) => (Array.isArray(prevState) ? [...prevState, newRow] : [newRow]));
     } catch (error) {
       console.error('Error:', error);
     }
-  };  
+  
+    setNewEvent({
+      event: '',
+      person: '',
+      week: '',
+    });
+    setShowForm(false);
+  }; 
 
   return (
     <SchedulingWrapper>
@@ -99,7 +100,7 @@ const Scheduling = ({ events, setEvents }) => {
           ))}
         </tr>
       </thead>
-      {rows.length ? (
+      {rows && rows.length ? (
         <tbody>
           {rows.map((row) => (
             <tr key={row.id}>
@@ -165,3 +166,4 @@ const Scheduling = ({ events, setEvents }) => {
 };
 
 export default Scheduling;
+
